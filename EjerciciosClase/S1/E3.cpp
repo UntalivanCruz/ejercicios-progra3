@@ -23,4 +23,5 @@ int main()
     std::cout<< "La multiplicacion es "<< multi<< std::endl;
     std::cout<< "La division es "<< divi<< std::endl;
     
+    return 0;
 }

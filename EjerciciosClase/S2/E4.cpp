@@ -32,6 +32,6 @@ int main()
 	cin>>valorfinal;
 	
 	
-	
+}
 
 //CRISTHIAM Ciclo, Validaciones y la impresion de salida

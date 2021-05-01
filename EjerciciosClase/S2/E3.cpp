@@ -14,26 +14,29 @@ vendedores.
 using namespace std;
 
 int main(){
-    bool status=false;
-    double totalVentas, comisiones, pagoTotalVendedor, promediopagos=0;
-    string deseacont;
-    int contador, vendedores;
+
+    float totalVentas, comisiones, pagoTotalVendedor, ventasNeto=0,promedioPagos=0;
+    int vendedor, cantVendedores;
     
-    contador=1;
+    vendedor=1;
     
     cout<<" a cuantos vendedores desea calacular: "; 
-    cin>>vendedores;
-    while(contador<=vendedores){
-        cout<<"¿Cuántas fueron las ventas del vendedor?\n";
+    cin>>cantVendedores;
+    while(vendedor<=cantVendedores){
+        cout<<"¿Cuántas fueron las ventas del vendedor "<<vendedor<<"?\n";
         cin>>totalVentas;
         
         comisiones=totalVentas*0.09;
         pagoTotalVendedor=comisiones+200;
         cout<<"El pago total del vendedor es: "<<pagoTotalVendedor<<endl;
+        ventasNeto += pagoTotalVendedor; 
+        // =
+        // +=   ventasNeto = ventasNeto + pagoTotalVendedor;
+        vendedor++;
     }
-    cout<<" Desea calacular a otro vendedor? "; 
-    cin>>status;
-
+    cout<<"\nEl total de ventas es de "<<ventasNeto<<endl; 
+    promedioPagos=ventasNeto/cantVendedores;
+    cout<<"El promedio de la comision de los vende es de "<<promedioPagos<<endl;
     return 0;
 }
 

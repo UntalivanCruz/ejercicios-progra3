@@ -1,5 +1,6 @@
 /* Pedir al usuario N números, almacenarlos en un arreglo dinámico
 posteriormente ordenar los números en orden ascendente y mostrarlos en pantalla.
+UTILIZAR ALGORITMOS DE BUSQUEDA
 */
 
 #include <iostream>
@@ -26,30 +27,60 @@ void mostrarDatos(int *datos,int cantidad){
         cout<<*(datos+contador)<<endl;
     }
 }
-//Funcion ordenar de forma ascendente y descendente
+
 void ordenarMetodoBurbuja(int *datos,int cantidad){
     int auxiliar;
-    for(int a=0; a<cantidad; a++){
-        for(int b=0;b<(cantidad-1);b++){
-            if(*(datos+b) > *(datos + b + 1)){
-                auxiliar = *(datos+b);
-                *(datos+b)=*(datos+b+1);
-                *(datos+b+1)=auxiliar;
-            }
-            
-        }
-    }
+    int opc;
+    cout<<"de que forma quiere ver el orden? Asc = 1     Desc = 0"<<endl;
+    cin>>opc;
+    if(opc == 1){
+    	cout<<"Forma ascendente"<<endl;
+	    for(int a=0; a<cantidad; a++){
+	        for(int b=0;b<(cantidad-1);b++){
+	            
+	            if(*(datos+b) > *(datos + b + 1)){
+	                auxiliar = *(datos+b);
+	                *(datos+b)=*(datos+b+1);
+	                *(datos+b+1)=auxiliar;
+	            }
+	            
+	        }
+	    }	
+	}else if(opc == 0){
+		cout<<"Forma descendente"<<endl;
+		for(int a=0; a<cantidad; a++){
+	        for(int b=0;b<(cantidad-1);b++){
+	            
+	            if(*(datos+b) < *(datos + b + 1)){
+	                auxiliar = *(datos+b);
+	                *(datos+b)=*(datos+b+1);
+	                *(datos+b+1)=auxiliar;
+	            }
+	            
+	        }
+	    }
+	}
+    
+    
 }
-//Investigar dos metodos de ordenamiento mas
 
 int main(){
-   setDatos();
-   cout<<"\n\tNUMEROS INGRESADOS(Sin Ordenar):"<<endl;
-   mostrarDatos(arregloNumeros,numEelementos);
-   ordenarMetodoBurbuja(arregloNumeros,numEelementos);
-   cout<<"\n\tNUMEROS INGRESADOS(Ordenados asc):"<<endl;
-   mostrarDatos(arregloNumeros,numEelementos);
-   delete[] arregloNumeros;
+	int seguir;
+	
+	while(seguir ==0){
+		setDatos();
+   		//cout<<"\n\tNUMEROS INGRESADOS(Sin Ordenar):"<<endl;
+  	
+	    ordenarMetodoBurbuja(arregloNumeros,numEelementos);
+	    mostrarDatos(arregloNumeros,numEelementos);
+	   /*cout<<"\n\tNUMEROS INGRESADOS(Ordenados asc):"<<endl;
+	   mostrarDatos(arregloNumeros,numEelementos);*/
+	   delete[] arregloNumeros;	
+	   
+	   cout<<"Desea Seguir?  SI= 0   NO= 1 : ";
+	   cin>>seguir;
+	}	
+   
    return 0;
 }
 

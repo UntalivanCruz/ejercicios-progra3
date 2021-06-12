@@ -12,7 +12,6 @@ using namespace std;
 int numEelementos;
 int *arregloNumeros;
 
-
 void busquedaSecuencial(int *datos, int cantidad){
     int valorBuscar, contador;
     bool band=false;

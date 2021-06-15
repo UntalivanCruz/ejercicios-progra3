@@ -27,7 +27,9 @@ void addCajas(Caja *&lista, int codigo){
     Caja *a1=lista;
     Caja *a2;
     
-    while((a1 != NULL) && (a1->codigo <codigo)){
+    while((a1 != NULL) 
+    //&& (a1->codigo <codigo)
+    ){
         a2=a1;
         a1=a1->continuacion;
     }
@@ -73,19 +75,51 @@ Caja * buscarCaja(Caja *lista, int codigo){
     return encontrada;
 }
 
-void borrarCaja(){
-    //
-    delete caja;
+//Borro la primer caja, se pierden las demas...
+void borrarCaja(Caja *&lista, int codigo){
+    
+    Caja *CajaBorrar;
+    Caja *auxiliar = NULL;
+    
+    CajaBorrar = lista;
+    
+    //Recorrer la lista de cajas
+    while((CajaBorrar != NULL) && (CajaBorrar->codigo != codigo)){
+        auxiliar = CajaBorrar;
+        CajaBorrar = CajaBorrar->continuacion;
+    }
+    
+    if(CajaBorrar == NULL){
+        cout<<"La caja no existe"<<endl;
+    }else if(auxiliar == NULL){
+        lista = lista->continuacion;
+        delete CajaBorrar;
+        cout<<"Se borro con el metodo 1"<<endl;
+    }else{
+        auxiliar->continuacion = CajaBorrar->continuacion;
+        delete CajaBorrar;
+        cout<<"se borro con el metodo 2"<<endl;
+    }
+}
+
+void eliminarListado(Caja *&lista){
+    Caja *aux=lista;
+    while(aux->continuacion!=NULL){
+        aux=lista->continuacion;
+        delete lista;
+        lista=aux->continuacion;
+    }
+
 }
 
 int main(){
     //LISTA MASTER
     Caja *listaMaster = NULL;
     int opcion,codigo;
-    bool salir=false;
+    bool salir=false,eliminar=false;
 
     while(!salir){
-        cout<<"\tMENU\n1.Agregar Cajas\n2.Mostrar Inventario\n3.Buscar\n4.Salir"<<endl;
+        cout<<"\tMENU\n1.Agregar Cajas\n2.Mostrar Inventario\n3.Buscar\n4.Borrar una caja\n5.Borrar todas las cajas\n6.Salir"<<endl;
         cout<<"Ingrese la opcion:";
         cin>>opcion;
         switch(opcion){
@@ -103,6 +137,19 @@ int main(){
                 cout<<"Posicion Caja: "<<buscarCaja(listaMaster,codigo)<<endl;
                 break;
             case 4:
+                cout<<"Que caja desea eliminar? Ingrese el codigo: ";
+                cin>>codigo;
+                borrarCaja(listaMaster,codigo);
+                break;
+            case 5:
+                cout<<"Desea eliminar la lista?: 1.SI 0.NO : ";
+                cin>>eliminar;
+                if(eliminar){
+                    eliminarListado(listaMaster);
+                    cout<<"Lista eliminada con exito"<<endl;
+                }
+                break;
+            case 6:
                 salir=1;
                 break;
         }
